@@ -1,0 +1,16 @@
+<!-- select_symptoms.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Wybierz Objawy</title>
+</head>
+<body>
+    <h2>Wybierz swoje objawy</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Zatwierdź</button>
+    </form>
+</body>
+</html>
