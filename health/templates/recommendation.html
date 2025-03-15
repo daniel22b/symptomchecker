@@ -1,4 +1,3 @@
-<!-- recommendation.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,5 +7,8 @@
 <body>
     <h2>Rekomendowana choroba:</h2>
     <p>{{ recommended_disease }}</p>
+    
+    <!-- Przycisk do powrotu do profilu użytkownika -->
+    <a href="{% url 'welcome' %}">Powróć do profilu</a>
 </body>
 </html>

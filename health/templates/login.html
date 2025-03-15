@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logowanie</title>
+</head>
+<body>
+    <h1>Zaloguj się</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" name="username" placeholder="Nazwa użytkownika" required>
+        <input type="password" name="password" placeholder="Hasło" required>
+        <button type="submit">Zaloguj się</button>
+    </form>
+
+    {% if messages %}
+        {% for message in messages %}
+            <p style="color: red;">{{ message }}</p>
+            <a href="{% url 'register' %}" style="display: block; color: blue; text-decoration: underline;">
+                Nie masz konta? Zarejestruj się
+            </a>
+        {% endfor %}
+    {% else %}
+        <a href="{% url 'register' %}">Nie masz konta? Zarejestruj się</a>
+    {% endif %}
+    
+    <br>
+    <a href="{% url 'home' %}">Powrót na stronę główną</a>
+</body>
+</html>

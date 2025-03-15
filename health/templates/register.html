@@ -1,0 +1,7 @@
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Zarejestruj się</button>
+</form>
+<a href="{% url 'login' %}">Masz już konto? Zaloguj się</a>
+<a href="{% url 'home' %}">Powrót na stronę główną</a>
