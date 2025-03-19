@@ -1,6 +1,5 @@
 import numpy as np
 from sklearn.neighbors import NearestNeighbors
-from django.shortcuts import render, redirect
 from .models import Disease, Symptom, UserSymptoms
 from .forms import SymptomSelectionForm
 from django.shortcuts import render, redirect

@@ -1,14 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Rekomendacja Choroby</title>
-</head>
-<body>
+{% extends 'glowny.html' %}
+
+{% block tytul %} Potencjalna choroba {% endblock %}
+
+{% block strona %}
     <h2>Rekomendowana choroba:</h2>
     <p>{{ recommended_disease }}</p>
     
     <!-- Przycisk do powrotu do profilu użytkownika -->
     <a href="{% url 'welcome' %}">Powróć do profilu</a>
-</body>
-</html>
+{% endblock %}

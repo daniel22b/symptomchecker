@@ -1,11 +1,9 @@
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Uzupełnij dane</title>
-</head>
-<body>
+{% extends 'glowny.html' %}
+
+{% block tytul %} Dane osobowe {% endblock %}
+
+
+{% block strona %}
     <h1>Uzupełnij swoje dane</h1>
     
     <form method="post">
@@ -13,5 +11,4 @@
         {{ form.as_p }}
         <button type="submit">Zapisz</button>
     </form>
-</body>
-</html>
+{% endblock %}

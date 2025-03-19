@@ -1,0 +1,52 @@
+/* Ustawienie tła */
+body {
+    background-image: url("/static/images/tlo.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    margin: 0;
+    padding: 0;
+}
+
+/* Styl okna */
+.transparent-box {
+    background: rgba(255, 255, 255, 0.2); /* Półprzezroczyste białe tło */
+    backdrop-filter: blur(10px); /* Efekt rozmazania */
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    width: 50%;
+    max-width: 1000px;
+    margin: 100px auto;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Styl linków */
+.transparent-box a {
+    display: block;
+    padding: 10px;
+    margin: 10px auto;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.transparent-box a:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+
+@font-face {
+    font-family: 'MorinaFont';
+    src: url("/static/fonts/Morina.woff") format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.morina-text {
+    font-family: 'MorinaFont', sans-serif;
+}
+

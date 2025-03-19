@@ -1,3 +1,7 @@
+{% extends 'glowny.html' %}
+
+{% block tytul %} Rejestracja {% endblock %}
+{% block strona %}
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
@@ -5,3 +9,5 @@
 </form>
 <a href="{% url 'login' %}">Masz już konto? Zaloguj się</a>
 <a href="{% url 'home' %}">Powrót na stronę główną</a>
+
+{% endblock %}
