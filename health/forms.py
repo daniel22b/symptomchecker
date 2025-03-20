@@ -14,7 +14,7 @@ from django.contrib.auth.models import User
 class RegisterForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
     password_confirm = forms.CharField(widget=forms.PasswordInput)
-
+    username = forms.CharField(max_length=12, help_text='')
     class Meta:
         model = User
         fields = ['username', 'email', 'password']

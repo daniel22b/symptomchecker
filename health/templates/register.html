@@ -2,12 +2,35 @@
 
 {% block tytul %} Rejestracja {% endblock %}
 {% block strona %}
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Zarejestruj się</button>
-</form>
+<div class="transparent-box">
+    <h1>Rejestracja</h1>
+    <form method="post">
+        {% csrf_token %}
+        
+        <div class="mb-3">
+            {{ form.username.label_tag }}
+            {{ form.username }}
+        </div>
+        
+        <div class="mb-3">
+            {{ form.email.label_tag }}
+            {{ form.email }}
+        </div>
+    
+        <div class="mb-3">
+            {{ form.password.label_tag }}
+            {{ form.password }}
+        </div>
+    
+        <div class="mb-3">
+            {{ form.password_confirm.label_tag }}
+            {{ form.password_confirm }}
+        </div>
+    
+        <button type="submit" class="btn btn-primary">Zarejestruj się</button>
+    </form>
+    
 <a href="{% url 'login' %}">Masz już konto? Zaloguj się</a>
 <a href="{% url 'home' %}">Powrót na stronę główną</a>
-
+</div>
 {% endblock %}

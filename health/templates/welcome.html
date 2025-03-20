@@ -3,13 +3,16 @@
 {% block tytul %} Witaj  {% endblock %}
 
 {% block strona %}
+<div class="transparent-box">
     <h1>Witaj, {{ username }}!</h1>
     <p>Wybierz opcję:</p>
     
     <a href="{% url 'recommend_disease' %}">
-        <button>Sprawdź chorobę</button>
+
+        <button type="submit" class="btn btn-primary" >Sprawdź potencjalną chorobę</button>
     </a>
     
     <br><br>
     <a href="{% url 'logout' %}">Wyloguj się</a>
+</div>
 {% endblock %}

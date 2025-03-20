@@ -3,19 +3,25 @@
 {% block tytul %} Logowanie {% endblock %}
 
 {% block strona %}
+<div class="transparent-box">
     <h1>Zaloguj się</h1>
 
     <form method="post">
         {% csrf_token %}
-        <input type="text" name="username" placeholder="Nazwa użytkownika" required>
-        <input type="password" name="password" placeholder="Hasło" required>
-        <button type="submit">Zaloguj się</button>
+        <div class="mb-3">
+        <input type="text" name="username" class="form-control" placeholder="Nazwa użytkownika" required>
+        </div>
+        <div class="mb-3">
+        <input type="password" name="password" class="form-control" placeholder="Hasło" required>
+    </div>
+        
+        <button type="submit" class="btn btn-primary" >Potwierdź</button>
     </form>
 
     {% if messages %}
         {% for message in messages %}
             <p style="color: red;">{{ message }}</p>
-            <a href="{% url 'register' %}" style="display: block; color: blue; text-decoration: underline;">
+            <a href="{% url 'register' %}" class="morina-text">
                 Nie masz konta? Zarejestruj się
             </a>
         {% endfor %}
@@ -25,5 +31,5 @@
     
     <br>
     <a href="{% url 'home' %}">Powrót na stronę główną</a>
-
+</div>
 {% endblock %}

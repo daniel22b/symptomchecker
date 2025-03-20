@@ -3,9 +3,12 @@
 {% block tytul %} Potencjalna choroba {% endblock %}
 
 {% block strona %}
+<div class="transparent-box">
     <h2>Rekomendowana choroba:</h2>
     <p>{{ recommended_disease }}</p>
+    <p>{{ recommended_disease.description|linebreaksbr  }}</p>
     
     <!-- Przycisk do powrotu do profilu użytkownika -->
     <a href="{% url 'welcome' %}">Powróć do profilu</a>
+</div>
 {% endblock %}

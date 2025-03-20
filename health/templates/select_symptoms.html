@@ -3,11 +3,17 @@
 {% block tytul %} Objawy {% endblock %}
 
 {% block strona %}
+<div class="transparent-box">
     <h2>Wybierz swoje objawy</h2>
     <form method="POST">
+        
         {% csrf_token %}
+
+
         {{ form.as_p }}
         <button type="submit">Zatwierdź</button>
     </form>
+</div>
 
 {% endblock %}
+

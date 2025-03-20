@@ -13,7 +13,7 @@ class Symptom(models.Model):
 class Disease(models.Model):
     name = models.CharField(max_length=100)
     symptoms = models.ManyToManyField(Symptom)
-    
+    description = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -30,10 +30,10 @@ class UserSymptoms(models.Model):
 
 # Klasa konfiguracji admina dla modelu Disease
 class DiseaseAdmin(admin.ModelAdmin):
-    # filter_horizontal powoduje, że pole ManyToMany (symptoms) będzie wyświetlane w formie listy z przyciskami
-    filter_horizontal = ('symptoms',)  # Umożliwia łatwiejsze wybieranie wielu objawów
+    filter_horizontal = ('symptoms',)  
 
 
+    
 from django.contrib.auth.models import User
 from django.db import models
 
@@ -58,10 +58,10 @@ class UserProfile(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
-    street = models.CharField(max_length=255)
-    city = models.CharField(max_length=100)
+    street = models.CharField(max_length=25)
+    city = models.CharField(max_length=20)
     postal_code = models.CharField(max_length=6)
-    phone_number = models.CharField(max_length=15)
+    phone_number = models.CharField(max_length=9)
     disease = models.ForeignKey('Disease', null=True, blank=True, on_delete=models.SET_NULL)
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
