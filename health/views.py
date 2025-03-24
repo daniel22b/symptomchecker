@@ -1,10 +1,11 @@
 import numpy as np
 from sklearn.neighbors import NearestNeighbors
-from .models import Disease, Symptom, UserSymptoms
-from .forms import SymptomSelectionForm
+from .models import Disease, Symptom
+from .forms import SymptomSelectionForm, UserProfileForm
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
+
 from .forms import RegisterForm
 from django.contrib import messages
 
@@ -63,19 +64,10 @@ def symptom_selection(request):
 
     return render(request, 'select_symptoms.html', {'form': form})
 
+@login_required
+def welcome(request):
+    return render(request, "welcome.html", {"username": request.user.username})
 
-def register(request):
-    if request.method == "POST":
-        form = RegisterForm(request.POST)
-        if form.is_valid():
-            user = form.save(commit=False)
-            user.set_password(form.cleaned_data["password"])
-            user.save()
-            login(request, user)
-            return redirect("complete_profile")
-    else:
-        form = RegisterForm()
-    return render(request, "register.html", {"form": form})
 
 def user_login(request):
     if request.method == "POST":
@@ -90,18 +82,26 @@ def user_login(request):
             messages.error(request, "Nie ma takiego konta.")
     return render(request, "login.html")
 
+
+
 def user_logout(request):
     logout(request)
     return redirect("login")
 
 
-def home(request):
-    return render(request, "home.html")  
+def register(request):
+    if request.method == "POST":
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.set_password(form.cleaned_data["password"])
+            user.save()
+            login(request, user)
+            return redirect("complete_profile")
+    else:
+        form = RegisterForm()
+    return render(request, "register.html", {"form": form})
 
-
-#----------------------------------------------------
-from django.shortcuts import render, redirect
-from .forms import UserProfileForm
 
 def complete_profile(request):
     if request.method == "POST":
@@ -116,10 +116,5 @@ def complete_profile(request):
     
     return render(request, "complete_profile.html", {"form": form})
 
-
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
-
-@login_required
-def welcome(request):
-    return render(request, "welcome.html", {"username": request.user.username})
+def home(request):
+    return render(request, "home.html")  

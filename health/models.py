@@ -18,34 +18,11 @@ class Disease(models.Model):
     def __str__(self):
         return self.name
 
-# Model użytkownika i jego objawów
-class UserSymptoms(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    symptoms = models.ManyToManyField(Symptom)
-
-    def __str__(self):
-        return f"Objawy użytkownika {self.user.username}"
-
-
 
 # Klasa konfiguracji admina dla modelu Disease
 class DiseaseAdmin(admin.ModelAdmin):
     filter_horizontal = ('symptoms',)  
-
-
     
-from django.contrib.auth.models import User
-from django.db import models
-
-class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    bio = models.TextField(blank=True, null=True)
-
-    def __str__(self):
-        return self.user.username
-
-from django.contrib.auth.models import User
-from django.db import models
 
 class UserProfile(models.Model):
     GENDER_CHOICES = [
