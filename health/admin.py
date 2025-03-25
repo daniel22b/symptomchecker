@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Symptom, Disease, DiseaseAdmin, UserProfile
+from .models import Symptom, Disease, UserSymptoms, DiseaseAdmin, UserProfile
 
 class UserProfileAdmin(admin.ModelAdmin):
     list_display = ('user', 'first_name', 'last_name', 'city', 'phone_number', 'disease')
@@ -7,4 +7,5 @@ class UserProfileAdmin(admin.ModelAdmin):
 
 admin.site.register(Symptom)
 admin.site.register(Disease, DiseaseAdmin)
+admin.site.register(UserSymptoms)
 admin.site.register(UserProfile, UserProfileAdmin)

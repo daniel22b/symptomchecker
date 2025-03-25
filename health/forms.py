@@ -1,6 +1,5 @@
 from django import forms
-from .models import Symptom, UserProfile
-from django.contrib.auth.models import User
+from .models import Symptom
 
 class SymptomSelectionForm(forms.Form):
     symptoms = forms.ModelMultipleChoiceField(
@@ -9,6 +8,8 @@ class SymptomSelectionForm(forms.Form):
         required=True
     )
 
+from django import forms
+from django.contrib.auth.models import User
 
 class RegisterForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
@@ -27,6 +28,9 @@ class RegisterForm(forms.ModelForm):
             raise forms.ValidationError("Hasła muszą być identyczne.")
 
         return cleaned_data
+
+from django import forms
+from .models import UserProfile
 
 class UserProfileForm(forms.ModelForm):
 

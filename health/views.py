@@ -1,11 +1,10 @@
 import numpy as np
 from sklearn.neighbors import NearestNeighbors
-from .models import Disease, Symptom
-from .forms import SymptomSelectionForm, UserProfileForm
+from .models import Disease, Symptom, UserSymptoms
+from .forms import SymptomSelectionForm
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
-
 from .forms import RegisterForm
 from django.contrib import messages
 
@@ -64,30 +63,6 @@ def symptom_selection(request):
 
     return render(request, 'select_symptoms.html', {'form': form})
 
-@login_required
-def welcome(request):
-    return render(request, "welcome.html", {"username": request.user.username})
-
-
-def user_login(request):
-    if request.method == "POST":
-        username = request.POST["username"]
-        password = request.POST["password"]
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            # return redirect("select_symptom")
-            return redirect("welcome")
-        else:
-            messages.error(request, "Nie ma takiego konta.")
-    return render(request, "login.html")
-
-
-
-def user_logout(request):
-    logout(request)
-    return redirect("login")
-
 
 def register(request):
     if request.method == "POST":
@@ -102,6 +77,31 @@ def register(request):
         form = RegisterForm()
     return render(request, "register.html", {"form": form})
 
+def user_login(request):
+    if request.method == "POST":
+        username = request.POST["username"]
+        password = request.POST["password"]
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            # return redirect("select_symptom")
+            return redirect("welcome")
+        else:
+            messages.error(request, "Nie ma takiego konta.")
+    return render(request, "login.html")
+
+def user_logout(request):
+    logout(request)
+    return redirect("login")
+
+
+def home(request):
+    return render(request, "home.html")  
+
+
+#----------------------------------------------------
+from django.shortcuts import render, redirect
+from .forms import UserProfileForm
 
 def complete_profile(request):
     if request.method == "POST":
@@ -116,5 +116,10 @@ def complete_profile(request):
     
     return render(request, "complete_profile.html", {"form": form})
 
-def home(request):
-    return render(request, "home.html")  
+
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render
+
+@login_required
+def welcome(request):
+    return render(request, "welcome.html", {"username": request.user.username})
