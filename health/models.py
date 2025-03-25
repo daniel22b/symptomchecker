@@ -37,7 +37,7 @@ class UserProfile(models.Model):
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
     street = models.CharField(max_length=25)
     city = models.CharField(max_length=20)
-    postal_code = models.CharField(max_length=6)
+    postal_code = models.CharField(max_length=6  )
     phone_number = models.CharField(max_length=9)
     disease = models.ForeignKey('Disease', null=True, blank=True, on_delete=models.SET_NULL)
     def __str__(self):

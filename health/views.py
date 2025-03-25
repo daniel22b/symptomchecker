@@ -1,13 +1,23 @@
 import numpy as np
 from sklearn.neighbors import NearestNeighbors
-from .models import Disease, Symptom
+from .models import Disease, Symptom, UserProfile
 from .forms import SymptomSelectionForm, UserProfileForm
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
-
 from .forms import RegisterForm
 from django.contrib import messages
+from rest_framework import viewsets
+from django.contrib.auth.models import User
+from .serializers import UserSerializer,UserProfileSerializer
+
+class UserView(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+class UserProfileView(viewsets.ModelViewSet):
+    queryset = UserProfile.objects.all()
+    serializer_class = UserProfileSerializer
 
 @login_required
 def recommend_disease(request):
