@@ -128,3 +128,12 @@ def complete_profile(request):
 
 def home(request):
     return render(request, "home.html")  
+
+
+#Dodanie wieku do kazdego uzytkownika 
+import random
+profiles = UserProfile.objects.all()
+
+for profile in profiles:
+    profile.age = random.randint(10, 60)  
+    profile.save()

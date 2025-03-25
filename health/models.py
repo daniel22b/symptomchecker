@@ -39,7 +39,9 @@ class UserProfile(models.Model):
     city = models.CharField(max_length=20)
     postal_code = models.CharField(max_length=6  )
     phone_number = models.CharField(max_length=9)
+    age = models.IntegerField(null=True, blank=True)
     disease = models.ForeignKey('Disease', null=True, blank=True, on_delete=models.SET_NULL)
+    
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 

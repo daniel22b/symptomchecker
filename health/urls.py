@@ -1,5 +1,6 @@
 from django.urls import path
 from .views import register, user_login, user_logout, symptom_selection,recommend_disease, home, complete_profile, welcome
+from symptomchecker import urls
 
 urlpatterns = [
     path("register/", register, name="register"),

@@ -14,4 +14,4 @@ class UserProfileSerializer(serializers.HyperlinkedModelSerializer):
         model = UserProfile
         fields = ["id","first_name", "last_name", "gender", "street",
                    "city",
-                 "postal_code", "phone_number"]
+                 "postal_code", "phone_number","age"]
