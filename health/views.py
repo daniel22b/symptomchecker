@@ -1,15 +1,15 @@
 import numpy as np
 from sklearn.neighbors import NearestNeighbors
 from .models import Disease, Symptom, UserProfile
-from .forms import SymptomSelectionForm, UserProfileForm
+from .forms import SymptomSelectionForm, UserProfileForm, RegisterForm
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
-from .forms import RegisterForm
 from django.contrib import messages
-from rest_framework import viewsets
+from rest_framework import viewsets, generics
 from django.contrib.auth.models import User
 from .serializers import UserSerializer,UserProfileSerializer
+from rest_framework.permissions import AllowAny, IsAuthenticated
 
 class UserView(viewsets.ModelViewSet):
     queryset = User.objects.all()
@@ -18,6 +18,7 @@ class UserView(viewsets.ModelViewSet):
 class UserProfileView(viewsets.ModelViewSet):
     queryset = UserProfile.objects.all()
     serializer_class = UserProfileSerializer
+    permission_classes = [AllowAny]
 
 @login_required
 def recommend_disease(request):
@@ -131,9 +132,9 @@ def home(request):
 
 
 #Dodanie wieku do kazdego uzytkownika 
-import random
-profiles = UserProfile.objects.all()
+# import random
+# profiles = UserProfile.objects.all()
 
-for profile in profiles:
-    profile.age = random.randint(10, 60)  
-    profile.save()
+# for profile in profiles:
+#     profile.age = random.randint(10, 60)  
+#     profile.save()
