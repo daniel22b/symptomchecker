@@ -10,18 +10,25 @@ from rest_framework import viewsets, generics
 from django.contrib.auth.models import User
 from .serializers import UserSerializer,UserProfileSerializer
 from rest_framework.permissions import AllowAny, IsAuthenticated
+import matplotlib.pyplot as plt
+from io import BytesIO
+from django.http import HttpResponse
+
 
 class UserView(viewsets.ModelViewSet):
+    """Widok API dla użytkowników."""
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
 class UserProfileView(viewsets.ModelViewSet):
+    """Widok API dla profili użytkowników."""
     queryset = UserProfile.objects.all()
     serializer_class = UserProfileSerializer
     permission_classes = [AllowAny]
 
 @login_required
 def recommend_disease(request):
+    """Przewidywana choroba na podstawie wybranych objawów użytkownika."""
     user_profile = request.user.userprofile 
     if request.method == 'POST':
         form = SymptomSelectionForm(request.POST)
@@ -52,7 +59,7 @@ def recommend_disease(request):
 
             distances, indices = model.kneighbors([user_symptom_vector])
 
-            # Pobieramy najbliższą chorobę
+            # Najbliższs choroba
             recommended_disease = disease_instances[indices[0][0]]
 
             user_profile.disease = recommended_disease
@@ -66,6 +73,7 @@ def recommend_disease(request):
 
 @login_required
 def symptom_selection(request):
+    """Widok umożliwiający użytkownikowi wybór objawów."""
     if request.method == 'POST':
         form = SymptomSelectionForm(request.POST)
         if form.is_valid():
@@ -77,17 +85,19 @@ def symptom_selection(request):
 
 @login_required
 def welcome(request):
+    """Ekran powitalny dla zalogowanego użytkownika."""
     return render(request, "welcome.html", {"username": request.user.username})
 
 
 def user_login(request):
+    """Logowanie użytkownika."""
+
     if request.method == "POST":
         username = request.POST["username"]
         password = request.POST["password"]
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            # return redirect("select_symptom")
             return redirect("welcome")
         else:
             messages.error(request, "Nie ma takiego konta.")
@@ -96,11 +106,13 @@ def user_login(request):
 
 
 def user_logout(request):
+    """Wylogowanie użytkownika."""
     logout(request)
     return redirect("login")
 
 
 def register(request):
+    """Rejestracja nowego użytkownika."""
     if request.method == "POST":
         form = RegisterForm(request.POST)
         if form.is_valid():
@@ -115,6 +127,7 @@ def register(request):
 
 
 def complete_profile(request):
+    """Uzupełnianie profilu użytkownika po rejestracji."""
     if request.method == "POST":
         form = UserProfileForm(request.POST)
         if form.is_valid():
@@ -128,10 +141,39 @@ def complete_profile(request):
     return render(request, "complete_profile.html", {"form": form})
 
 def home(request):
+    """Strona główna aplikacji."""
     return render(request, "home.html")  
 
 
-#Dodanie wieku do kazdego uzytkownika 
+#FAZA TESTOWA
+# def generate_chart(request):
+    user_profile = UserProfile.objects.all()
+
+    months = ['Jan', 'Feb', 'Mar', 'Apr', 'May']
+    values = [10, 15, 7, 20, 5] 
+
+    chart_type = request.GET.get('chart_type', 'pie') 
+
+    fig, ax = plt.subplots()
+    if chart_type == 'bar':
+        ax.bar(months, values)
+    elif chart_type == 'line':
+        ax.plot(months, values)
+    elif chart_type == 'pie':
+        ax.pie(values, labels=months, autopct='%1.1f%%')
+
+   
+    ax.set_title('Liczba transakcji w różnych miesiącach')
+    ax.set_xlabel('')
+    ax.set_ylabel('Liczba transakcji')
+    
+ 
+    buf = BytesIO()
+    plt.savefig(buf, format='png')
+    buf.seek(0)
+    return HttpResponse(buf, content_type='image/png')
+
+
 # import random
 # profiles = UserProfile.objects.all()
 

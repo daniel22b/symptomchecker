@@ -1,7 +1,7 @@
 /* Ustawienie tła */
 body {
     background-image: url("/static/images/tlo.jpg");
-
+    background-color: wheat;
     background-size: cover;
     background-position: center;
     background-attachment: fixed;

@@ -2,15 +2,21 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.contrib import admin
 
-# Model objawu, np. ból głowy, kaszel itp.
+
 class Symptom(models.Model):
+    """
+    Model reprezentujący objaw choroby, np. ból głowy, kaszel itp.
+    """
     name = models.CharField(max_length=100)
 
     def __str__(self):
         return self.name
 
-# Model choroby, która jest związana z objawami
+
 class Disease(models.Model):
+    """
+    Model reprezentujący chorobę, która jest związana z określonymi objawami.
+    """
     name = models.CharField(max_length=100)
     symptoms = models.ManyToManyField(Symptom)
     description = models.TextField(blank=True, null=True)
@@ -19,12 +25,18 @@ class Disease(models.Model):
         return self.name
 
 
-# Klasa konfiguracji admina dla modelu Disease
+
 class DiseaseAdmin(admin.ModelAdmin):
+    """
+    Konfiguracja modelu Disease w panelu administracyjnym Django.
+    """
     filter_horizontal = ('symptoms',)  
     
 
 class UserProfile(models.Model):
+    """
+    Model przechowujący dodatkowe informacje o użytkowniku, w tym dane osobowe oraz powiązaną chorobę.
+    """
     GENDER_CHOICES = [
         ('M', 'Mężczyzna'),
         ('K', 'Kobieta'),

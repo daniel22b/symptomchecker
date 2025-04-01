@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import register, user_login, user_logout, symptom_selection,recommend_disease, home, complete_profile, welcome
-from symptomchecker import urls
+from .views import register, user_login, user_logout, symptom_selection,recommend_disease, home, complete_profile, welcome#generate_chart
+
 
 urlpatterns = [
     path("register/", register, name="register"),
@@ -11,4 +11,5 @@ urlpatterns = [
     path("", home, name="home"),
     path("complete-profile/", complete_profile, name="complete_profile"),
     path("welcome/", welcome, name="welcome"),
+    #path('chart/', generate_chart, name='generate_chart'),
 ]
