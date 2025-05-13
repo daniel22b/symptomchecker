@@ -40,17 +40,31 @@
 ##  Struktura katalogów
 symptomchecker/
 ├── health/
+
 │   ├── models.py
+
 │   ├── views.py
+
 │   ├── forms.py
+
 │   ├── serializers.py
+
 │   ├── urls.py
+
 ├── templates/
+
 │   └── health/
+
 │       ├── register.html
+
 │       ├── login.html
+
 │       ├── select_symptoms.html
+
 │       └── ...
+
 ├── static/
+
 ├── manage.py
+
 └── README.md
